@@ -1,3 +1,4 @@
+@@ -1,281 +1,413 @@
 <html>
    <head>
       <title>zBP : Tower Dice</title>
@@ -278,4 +279,417 @@
 		}
     </script>
     </body>
-    </html>
+    </html> 
+<html>
+  <head>
+      <title>zBP : Team Builder</title>
+      <meta name="apple-mobile-web-app-title" content="Team Builder">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="black">
+      <link rel="icon" type="image/png" href="img/logo-tb.png" />
+      <link rel="apple-touch-icon" href="img/logo-tb.png"/>
+      <meta name="viewport" content="width=360, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+  <style>
+    * { margin: 0; padding: 0; font-size: 16px; }
+    fieldset { margin: 4px; padding: 4px; width: 162px; display: inline-block; vertical-align: top; }
+  </style>
+  </head>
+  <body onload="load();" style="width: 360px;">
+    <div id="result" style="width: 360px;"></div>
+    <div style="width: 360px; padding : 8px;">
+    <center><h2>ZBP : Team Builder <span id="nbHeros"></span></h2></center>
+    <hr>
+    <div style="width: 170px; float: left;">
+   <fieldset>
+       <legend><label><input type="checkbox" onchange="check(this)" checked> Black Plague </label></legend>
+     <label><input type="checkbox" name="heros" id="Ann" checked> Ann</label><br>
+     <label><input type="checkbox" name="heros" id="Baldric" checked> Baldric </label><br>
+     <label><input type="checkbox" name="heros" id="Clovis" checked> Clovis </label><br>
+     <label><input type="checkbox" name="heros" id="Nelly" checked> Nelly </label><br>
+     <label><input type="checkbox" name="heros" id="Samson" checked> Samson </label><br>
+     <label><input type="checkbox" name="heros" id="Silas" checked> Silas </label><br>
+   </fieldset>  
+   <fieldset>
+       <legend><label><input type="checkbox" onchange="check(this)"> Wulfsburg </label></legend>
+     <label><input type="checkbox" name="heros" id="Ariane"> Ariane</label><br>
+     <label><input type="checkbox" name="heros" id="Karl"> Karl </label><br>
+     <label><input type="checkbox" name="heros" id="Morrigan"> Morrigan </label><br>
+     <label><input type="checkbox" name="heros" id="Theo"> Theo </label><br>
+   </fieldset>   
+   <fieldset>
+       <legend><label><input type="checkbox" onchange="check(this)"> Heros Box #1 </label></legend>
+     <label><input type="checkbox" name="heros" id="Arnaud"> Arnaud</label><br>
+     <label><input type="checkbox" name="heros" id="Glynda"> Glynda </label><br>
+     <label><input type="checkbox" name="heros" id="Julian"> Julian </label><br>
+     <label><input type="checkbox" name="heros" id="Silvia"> Silvia </label><br>
+     <label><input type="checkbox" name="heros" id="Tucker"> Tucker </label><br>
+   </fieldset>
+   <fieldset>
+       <legend><label><input type="checkbox" onchange="check(this)"> KickStarter  </label></legend>
+        <label><input type="checkbox" name="heros" id="Beauregard"> Beauregard </label><br>
+		<label><input type="checkbox" name="heros" id="Bob"> Bob </label><br>
+		<label><input type="checkbox" name="heros" id="Chauncey"> Chauncey </label><br>
+		<label><input type="checkbox" name="heros" id="Danton"> Danton </label><br>
+		<label><input type="checkbox" name="heros" id="DrStormcrow"> DrStormcrow </label><br>
+		<label><input type="checkbox" name="heros" id="EvilTroy"> EvilTroy </label><br>
+		<label><input type="checkbox" name="heros" id="Falstaff"> Falstaff </label><br>
+		<label><input type="checkbox" name="heros" id="Gilbert"> Gilbert </label><br>
+		<label><input type="checkbox" name="heros" id="Gowan"> Gowan </label><br>
+		<label><input type="checkbox" name="heros" id="Gregoire"> Gregoire </label><br>
+		<label><input type="checkbox" name="heros" id="Grom"> Grom </label><br>
+		<label><input type="checkbox" name="heros" id="Hitch"> Hitch </label><br>
+		<label><input type="checkbox" name="heros" id="James"> James </label><br>
+		<label><input type="checkbox" name="heros" id="LadyFaye"> LadyFaye  </label><br>
+		<label><input type="checkbox" name="heros" id="Lucas"> Lucas </label><br>
+		<label><input type="checkbox" name="heros" id="Montalban"> Montalban </label><br>
+		<label><input type="checkbox" name="heros" id="Morgan"> Morgan  </label><br>
+		<label><input type="checkbox" name="heros" id="Mortimer"> Mortimer  </label><br>
+		<label><input type="checkbox" name="heros" id="Paul"> Paul  </label><br>
+		<label><input type="checkbox" name="heros" id="Piper"> Piper  </label><br>
+		<label><input type="checkbox" name="heros" id="Scowl"> Scowl  </label><br>
+		<label><input type="checkbox" name="heros" id="Thalia"> Thalia  </label><br>
+		<label><input type="checkbox" name="heros" id="Troy"> Troy  </label><br>
+		<label><input type="checkbox" name="heros" id="William"> William  </label><br>
+		<label><input type="checkbox" name="heros" id="Xuxa"> Xuxa  </label><br>
+   </fieldset> 
+    <fieldset>
+       <legend><label><input type="checkbox" onchange="check(this)"> Bonus </label></legend>
+		<label><input type="checkbox" name="heros" id="Anatole"> Anatole </label><br>
+		<label><input type="checkbox" name="heros" id="Benson"> Benson </label><br>
+		<label><input type="checkbox" name="heros" id="Eleonore"> Eleonore </label><br>
+		<label><input type="checkbox" name="heros" id="Enzo"> Enzo </label><br>
+		<label><input type="checkbox" name="heros" id="Homer"> Homer </label><br>
+		<label><input type="checkbox" name="heros" id="Megumi"> Megumi </label><br>
+		<label><input type="checkbox" name="heros" id="OeildEpervi"> OeildEpervier </label><br>
+		<label><input type="checkbox" name="heros" id="Piotr"> Piotr </label><br>
+		<label><input type="checkbox" name="heros" id="Willow"> Willow </label><br>
+   </fieldset>   
+   </div>
+   <div style="width: 180px; float: right;">
+   <fieldset>
+       <legend><label><input type="checkbox" onchange="check(this)"> SGB Na&iuml;ade </label></legend>
+		<label><input type="checkbox" name="heros" id="Merieil"> Merieil </label><br>
+		<label><input type="checkbox" name="heros" id="Milo"> Milo </label><br>
+		<label><input type="checkbox" name="heros" id="Ostokar"> Ostokar </label><br>
+		<label><input type="checkbox" name="heros" id="Thundergut"> Thundergut </label><br>
+   </fieldset>   
+   <fieldset>
+       <legend><label><input type="checkbox" onchange="check(this)"> SGB Edouard Guiton </label></legend>
+         <label><input type="checkbox" name="heros" id="Brickborn"> Brickborn </label><br>
+		<label><input type="checkbox" name="heros" id="Hewelin"> Hewelin </label><br>
+		<label><input type="checkbox" name="heros" id="Kaila"> Kaila </label><br>
+		<label><input type="checkbox" name="heros" id="Shalheira"> Shalheira </label><br>
+   </fieldset>   
+   <fieldset>
+       <legend><label><input type="checkbox" onchange="check(this)"> SGB Marc Simonetti </label></legend>
+		<label><input type="checkbox" name="heros" id="Antha"> Antha </label><br>
+		<label><input type="checkbox" name="heros" id="Cadence"> Cadence </label><br>
+		<label><input type="checkbox" name="heros" id="Grim"> Grim </label><br>
+		<label><input type="checkbox" name="heros" id="RedcapRodney"> RedcapRodney </label><br>
+   </fieldset>   
+   <fieldset>
+       <legend><label><input type="checkbox" onchange="check(this)"> SGB Paolo Parente </label></legend>
+		<label><input type="checkbox" name="heros" id="Arnwal"> Arnwal </label><br>
+		<label><input type="checkbox" name="heros" id="Konrad"> Konrad </label><br>
+		<label><input type="checkbox" name="heros" id="Skoll"> Skoll </label><br>
+		<label><input type="checkbox" name="heros" id="Undraal"> Undraal </label><br>
+   </fieldset>   
+   <fieldset>
+       <legend><label><input type="checkbox" onchange="check(this)"> SGB Adrian Smith </label></legend>
+		<label><input type="checkbox" name="heros" id="CulNar"> CulNar </label><br>
+		<label><input type="checkbox" name="heros" id="Gurbak"> Gurbak </label><br>
+		<label><input type="checkbox" name="heros" id="Jorvak"> Jorvak </label><br>
+		<label><input type="checkbox" name="heros" id="ShaKeel"> ShaKeel </label><br>
+   </fieldset>   
+   <fieldset>
+       <legend><label><input type="checkbox" onchange="check(this)"> SGB Paul Bonner </label></legend>
+		<label><input type="checkbox" name="heros" id="Bazak"> Bazak </label><br>
+		<label><input type="checkbox" name="heros" id="Genevieve"> Genevieve </label><br>
+		<label><input type="checkbox" name="heros" id="Klom"> Klom </label><br>
+		<label><input type="checkbox" name="heros" id="Mizar"> Mizar </label><br>
+   </fieldset>   
+   <fieldset>
+       <legend><label><input type="checkbox" onchange="check(this)"> SGB Jovem Nerd </label></legend>
+		<label><input type="checkbox" name="heros" id="Johrgrund"> Johrgrund </label><br>
+		<label><input type="checkbox" name="heros" id="Korin"> Korin </label><br>
+		<label><input type="checkbox" name="heros" id="RuffGhanor"> RuffGhanor </label><br>
+		<label><input type="checkbox" name="heros" id="ThePrior"> ThePrior </label><br>
+   </fieldset>   
+   <fieldset>
+       <legend><label><input type="checkbox" onchange="check(this)"> SGB Stefan Kopinski </label></legend>
+		<label><input type="checkbox" name="heros" id="Azure"> Azure </label><br>
+		<label><input type="checkbox" name="heros" id="Gaak"> Gaak </label><br>
+		<label><input type="checkbox" name="heros" id="TheBlackhea"> TheBlackheart </label><br>
+		<label><input type="checkbox" name="heros" id="Ysabel"> Ysabel </label><br>
+   </fieldset>   
+   <fieldset>
+       <legend><label><input type="checkbox" onchange="check(this)"> SGB Karl Kopinski </label></legend>
+		<label><input type="checkbox" name="heros" id="DameAheliss"> DameAhelissa </label><br>
+		<label><input type="checkbox" name="heros" id="Garuk"> Garuk </label><br>
+		<label><input type="checkbox" name="heros" id="Marcus"> Marcus </label><br>
+		<label><input type="checkbox" name="heros" id="Ulfo"> Ulfo </label><br>
+   </fieldset>    
+   <fieldset>
+       <legend><label><input type="checkbox" onchange="check(this)"> SGB Carl Critchlow </label></legend>
+		<label><input type="checkbox" name="heros" id="BlackCurran"> BlackCurrant </label><br>
+		<label><input type="checkbox" name="heros" id="Persephone"> Persephone </label><br>
+		<label><input type="checkbox" name="heros" id="Thrud"> Thrud </label><br>
+   </fieldset>
+   <fieldset>
+       <legend><label><input type="checkbox" onchange="check(this)"> SGB Neal Adams </label></legend>
+		<label><input type="checkbox" name="heros" id="Alainon"> Alainon </label><br>
+		<label><input type="checkbox" name="heros" id="Golor"> Golor </label><br>
+		<label><input type="checkbox" name="heros" id="Gronstag"> Gronstag </label><br>
+		<label><input type="checkbox" name="heros" id="Yrina"> Yrina </label><br>
+   </fieldset>
+   <fieldset>
+       <legend><label><input type="checkbox" onchange="check(this)"> SGB John Howe  </label></legend>
+		<label><input type="checkbox" name="heros" id="Cyrine"> Cyrine </label><br>
+		<label><input type="checkbox" name="heros" id="Dravog"> Dravog </label><br>
+		<label><input type="checkbox" name="heros" id="Gorvin"> Gorvin </label><br>
+		<label><input type="checkbox" name="heros" id="Hildir"> Hildir </label><br>
+   </fieldset>   
+   <fieldset>
+       <legend><label><input type="checkbox" onchange="check(this)"> SGB Gipi </label></legend>
+		<label><input type="checkbox" name="heros" id="Celia"> Celia </label><br>
+		<label><input type="checkbox" name="heros" id="DonnaCarlotta"> DonnaCarlotta </label><br>
+		<label><input type="checkbox" name="heros" id="Pipino"> Pipino </label><br>
+		<label><input type="checkbox" name="heros" id="Principino"> Principino </label><br>
+   </fieldset>
+
+   </div>
+       <hr style="clear: both;"><br>
+    <center><input type="button" id="btnSave" Value=" Save & Fight ! " onclick="save();"></center>
+    <BR><BR></div>
+  <script>
+    var aHeros = new Array();
+    
+    function check(it)
+    {
+        var chk = it.checked;
+        var elm = it;
+        while (elm.tagName != 'FIELDSET')
+            elm = elm.parentElement;
+        var list = elm.getElementsByTagName('INPUT');
+        for (i=1; i<list.length; i++)
+        	  list[i].checked = chk;
+    }
+    
+    function load()
+    {
+      var sBox = localStorage.getItem('ZBP_TeamBuilder');
+      //console.log('LOAD:'+sBox);
+      
+      var oBox = JSON.parse(sBox);
+      for(var sKey in oBox)
+        {
+          document.getElementById(sKey).checked = oBox[sKey];
+        }
+      init();
+    }    
+    
+    function save()
+    {
+      var list = document.getElementsByName('heros');
+      var oBox = new Object();
+      for (var i=0; i < list.length; i++)
+        {
+          var sID = list[i].id;
+          oBox[sID] = list[i].checked;
+        }
+      var sBox = JSON.stringify(oBox);
+      //console.log('SAVE:'+sBox);
+      localStorage.setItem('ZBP_TeamBuilder', sBox);
+      //init();
+      fight();
+    }    
+    
+    function init()
+    {
+          var aCard = new Object();
+		//CoreBox
+			aCard['Ann']        = 'Ann.jpg';
+			aCard['Baldric']    = 'Baldric.jpg';
+			aCard['Clovis']     = 'Clovis.jpg';
+			aCard['Nelly']      = 'Nelly.jpg';
+			aCard['Samson']     = 'Samson.jpg';
+			aCard['Silas']      = 'Silas.jpg';
+		//Wulf
+			aCard['Ariane']     = 'Ariane.jpg';
+			aCard['Karl']       = 'Karl.jpg';
+			aCard['Morrigan']   = 'Morrigan.jpg';
+			aCard['Theo']       = 'Theo.jpg'; 
+     	//HerosBox1
+			aCard['Arnaud']     = 'Arnaud.jpg';
+			aCard['Glynda']     = 'Glynda.jpg';
+			aCard['Julian']     = 'Julian.jpg';
+			aCard['Silvia']     = 'Sylvia.jpg';
+			aCard['Tucker']     = 'Tucker.jpg';
+    	//KS
+			aCard['Beauregard'] = 'Beauregard.jpg';
+			aCard['Bob']        = 'Bob.jpg';
+			aCard['Chauncey']   = 'Chauncey.jpg';
+			aCard['Danton']     = 'Danton.jpg';
+			aCard['DrStormcrow']= 'DrStormcrow.jpg';
+			aCard['EvilTroy']   = 'EvilTroy.jpg';
+			aCard['Falstaff']   = 'Falstaff.jpg';
+			aCard['Gilbert']    = 'Gilbert.jpg';
+			aCard['Gowan']      = 'Gowan.jpg';
+			aCard['Gregoire']   = 'Gregoire.jpg';
+			aCard['Grom']       = 'Grom.jpg';
+			aCard['Hitch']      = 'Hitch.jpg';
+			aCard['James']      = 'James.jpg';
+			aCard['LadyFaye']   = 'LadyFaye.jpg'; 
+			aCard['Lucas']      = 'Lucas.jpg';
+			aCard['Montalban']  = 'Montalban2.jpg'; 
+			aCard['Morgan']     = 'Morgan.jpg'; 
+			aCard['Mortimer']   = 'Mortimer.jpg'; 
+			aCard['Paul']       = 'Paul.jpg'; 
+			aCard['Piper']      = 'Piper.jpg'; 
+			aCard['Scowl']      = 'Scowl.jpg'; 
+			aCard['Thalia']     = 'Thalia.jpg'; 
+			aCard['Troy']       = 'Troy.jpg'; 
+			aCard['William']    = 'William.jpg'; 
+			aCard['Xuxa']       = 'Xuxa.jpg'; 
+		//Naïade                    
+			aCard['Merieil']    = 'Merieil.jpg'; 
+			aCard['Milo']       = 'Milo.jpg'; 
+			aCard['Ostokar']    = 'Ostokar.jpg'; 
+			aCard['Thundergut'] = 'Thundergut.jpg'; 
+		//Edouard                  
+			aCard['Brickborn']  = 'Brickborn.jpg'; 
+			aCard['Hewelin']    = 'Hewelin.jpg'; 
+			aCard['Kaila']      = 'Kaila.jpg'; 
+			aCard['Shalheira']  = 'Shalheira.jpg'; 
+		//Marc	                   
+			aCard['Antha']      = 'Antha.jpg'; 
+			aCard['Cadence']    = 'Cadence.jpg'; 
+			aCard['Grim']       = 'Grim.jpg'; 
+			aCard['RedcapRodney']= 'RedcapRodney.jpg';
+		//Paolo                
+			aCard['Arnwal']     = 'Arnwal.jpg'; 
+			aCard['Konrad']     = 'Konrad.jpg'; 
+			aCard['Skoll']      = 'Skoll.jpg'; 
+			aCard['Undraal']    = 'Undraal.jpg'; 
+		//Adrian	               
+			aCard['CulNar']     = 'CulNar.jpg'; 
+			aCard['Gurbak']     = 'Gurbak.jpg'; 
+			aCard['Jorvak']     = 'Jorvak.jpg'; 
+			aCard['ShaKeel']    = 'ShaKeel.jpg'; 
+		//Paul	                      
+			aCard['Bazak']      = 'Bazak.jpg'; 
+			aCard['Genevieve']  = 'Genevieve.jpg'; 
+			aCard['Klom']       = 'Klom.jpg'; 
+			aCard['Mizar']      = 'Mizar.jpg'; 
+		//Jovem	                   
+			aCard['Johrgrund']  = 'Johrgrund.jpg'; 
+			aCard['Korin']      = 'Korin.jpg'; 
+			aCard['RuffGhanor'] = 'RuffGhanor.jpg';
+			aCard['ThePrior']   = 'ThePrior.jpg'; 
+		//Steph	                   
+			aCard['Azure']      = 'Azure.jpg'; 
+			aCard['Gaak']       = 'Gaak.jpg'; 
+			aCard['TheBlackheart'] = 'TheBlackheart.jpg'; 
+			aCard['Ysabel']     = 'Ysabel.jpg'; 
+		//Karl                          
+			aCard['DameAhelissa']= 'DameAhelissa.jpg'; 
+			aCard['Garuk']      = 'Garuk.jpg'; 
+			aCard['Marcus']     = 'Marcus.jpg'; 
+			aCard['Ulfo']       = 'Ulfo.jpg'; 
+		//Carl	
+			aCard['BlackCurrant'] = 'BlackCurrant.jpg'; 
+			aCard['Persephone'] = 'Persephone.jpg'; 
+			aCard['Thrud']      = 'Thrud.jpg'; 
+		//Bonus	
+			aCard['Anatole']    = 'Anatole.jpg'; 
+			aCard['Benson']     = 'Benson.jpg'; 
+			aCard['Eleonore']   = 'Eleonore.jpg'; 
+			aCard['Enzo']       = 'Enzo.jpg'; 
+			aCard['Homer']      = 'Homer.jpg'; 
+			aCard['Megumi']     = 'Megumi.jpg'; 
+			aCard['OeildEpervier'] = 'OeildEpervier.jpg'; 
+			aCard['Piotr']      = 'Piotr.jpg'; 
+			aCard['Willow']     = 'Willow.jpg'; 
+        //Neal
+            aCard['Alainon']    = 'Alainon.jpg';
+            aCard['Golor']      = 'Golor.jpg';
+            aCard['Gronstag']   = 'Gronstag.jpg';
+            aCard['Yrina']      = 'Yrina.jpg';
+        //John
+            aCard['Cyrine']     = 'Cyrine.jpg';
+            aCard['Dravog']     = 'Dravog.jpg';
+            aCard['Gorvin']     = 'Gorvin.jpg';
+            aCard['Hildir']     = 'Hildir.jpg';
+        //Gipi
+            aCard['Celia']      = 'Celia.jpg';
+            aCard['DonnaCarlotta'] = 'Donna_Carlotta.jpg';
+            aCard['Pipino']     = 'Pipino.jpg';
+            aCard['Principino'] = 'Principino.jpg';
+        
+          preloadImages(aCard);
+          
+          aHeros = new Array();
+          var list = document.getElementsByName('heros');
+          for (var i=0; i < list.length; i++)
+          {
+            if (list[i].checked)
+            {
+                aHeros.push(aCard[list[i].id]);
+            }
+          }
+          shuffle(aHeros);
+          document.getElementById('nbHeros').innerHTML = ' &mdash; '+aHeros.length+' H&eacute;ros';   
+
+          //console.log(aHeros);
+    }
+    
+    function fight()
+    {
+      var name = aHeros.shift();
+      var url  = '/heros/'+ name;
+      name = name.replace('.jpg','');
+      document.getElementById('result').innerHTML = '<img alt="'+name+'" title="'+name+'" src="'+url+'" width="375" height="576" onclick="fight();" style="cursor: pointer;">'
+      document.getElementById('result').scrollIntoView();
+      if (aHeros.length < 1)    
+        init();   
+    }
+    
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+    
+    function shuffle(a) {
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
+    
+    function preloadImages(obj) 
+    {
+        var array = new Array();
+        for( iobj in obj )    
+            array.push(obj[iobj]); 
+
+        if (!preloadImages.list) {
+            preloadImages.list = [];
+        }
+        var list = preloadImages.list;
+        for (var i = 0; i < array.length; i++) {
+            var img = new Image();
+            img.onload = function() {
+                var index = list.indexOf(this);
+                if (index !== -1) {
+                    // remove image from the array once it's loaded
+                    // for memory consumption reasons
+                    list.splice(index, 1);
+                }
+            }
+            list.push(img);
+            img.src = '/heros/'+array[i];
+    }
+}
+  </script>
+    </body>
+</html> 
