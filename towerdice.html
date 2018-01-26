@@ -1,0 +1,281 @@
+<html>
+   <head>
+      <title>zBP : Tower Dice</title>
+      <meta name="apple-mobile-web-app-title" content="Tower Dice">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="black">
+      <link rel="icon" type="image/png" href="img/logo-td.png" />
+      <link rel="apple-touch-icon" href="img/logo-td.png"/>
+            
+      <meta name="viewport" content="width=360, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+  <style>
+    * { margin: 0; padding: 0; font-size: 14px; }
+    table td.ar { text-align: right;}	
+    table td.ac { text-align: center;}	
+	.css1 { background-color: #eee; line-height: 28px; }
+	.css0 { background-color: #fff; line-height: 28px; }
+	.ts { font-size: 9px; }
+  </style> 
+  </head>
+  <body onload="init();" style="width: 360px;">
+    <div style="width: 360px; padding : 8px; ">
+    <center><h2>ZBP : TowerDice</h2></center>
+	<HR>	
+	<img src="https://s10.postimg.org/42ryg5wbt/Eo_C.jpg" width="360" style="z-index: -1;position: absolute;">
+    <table style="margin-top: 80px;">
+        <tr>
+            <td width="150" class="ar"><select id="nbDie" onchange="showStat();"></select></td>
+            <td width="85"  class="ar"><select id="nbHit" onchange="showStat();"></select></td>
+            <td width="105" class="ar">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="ar"><label><input type="checkbox" id="plusOne" onchange="showStat();"> +1 to roll dice </label></td>
+            <td colspan="2" class="ar"><label><input type="checkbox" id="critical6"> Roll 6 : +1 die </label></td>
+        </tr>
+    </table>
+	<br>
+	<table width="100%">
+		<tr>
+			<td width="25%" class="ac"> <input type="button" value=" <<< Prev " onclick="playerPrev();"> </td>
+			<td width="50%" class="ac"> <select id="nbPlayer" onchange="loadPlayer()"></select> </td>
+			<td width="25%" class="ac"> <input type="button" value=" Next >>> " onclick="playerNext();">  </td>
+		</tr>		
+		<tr>
+			<td class="ac" valign="bottom"> <input type="button" value=" |< Go 1st " onclick="playerFirst();"> </td>
+			<td class="ac" valign="bottom"> <input style="margin-top: 10px;" type="button" id="btnFight" Value=" Fight ! " onclick="fight();"> </td>
+			<td class="ac" valign="bottom"> <input type="button" value=" Reset " onclick="resetCache();">  </td>
+		</tr>		
+	</table>
+
+    </div>
+	<div id="result" onclick="fight();" style="background-color: #eee; cursor: pointer; width: 360px; height:360px; overflow: auto; overflow-y: scroll;}"></div>	
+    <script>
+		var aStat				= new Array();
+		var elmResult 			= top.document.getElementById('result');		
+		var elmPlusOne  		= top.document.getElementById('plusOne');
+		var elmCritical6		= top.document.getElementById('critical6');
+		var elmNbPlayer			= top.document.getElementById('nbPlayer');
+		var elmNbDie 			= top.document.getElementById('nbDie');
+		var elmNbHit 			= top.document.getElementById('nbHit');
+		var elmBtnFight 		= top.document.getElementById('btnFight');
+		var ligne 				= 0;
+		
+        function init()
+        {
+			for (i=0; i<6; i++)
+			{
+				percentMiss = i / 6;
+				percent		= 100 * (1-percentMiss);
+				percent     = Math.round(percent * 100) / 100
+				aStat[i] 	= percent;
+			}
+		
+			var myOption;
+
+			for (i=1; i<=10; i++)
+			{
+			    myOption = new Option('Player #'+i,i);
+			    elmNbPlayer.appendChild(myOption); 
+			}
+			
+			for (i=1; i<=20; i++)
+			{
+			    myOption = new Option(i);
+			    elmNbDie.appendChild(myOption); 
+			}
+
+			for (i=6; i>1; i--)
+			{
+			    myOption = new Option(i+'+',i);
+			    elmNbHit.appendChild(myOption); 
+			}
+			
+			elmNbDie.selectedIndex = 0;
+			elmNbHit.selectedIndex = 2;
+
+			showStat();
+        }
+		
+		function playerFirst()
+		{
+			savePlayer();
+			elmNbPlayer.selectedIndex = 0;
+			loadPlayer();
+		}
+		
+		
+		function playerPrev()
+		{
+			savePlayer();
+			if (elmNbPlayer.selectedIndex > 0)
+				elmNbPlayer.selectedIndex--;
+			else
+				elmNbPlayer.selectedIndex = 9;
+			loadPlayer();
+		}		
+
+		function playerNext()
+		{
+			savePlayer();
+			if (elmNbPlayer.selectedIndex < 9)
+				elmNbPlayer.selectedIndex++;
+			else
+				elmNbPlayer.selectedIndex = 0;
+			loadPlayer();
+		}
+		
+		function loadPlayer()
+		{
+			var sJson = localStorage.getItem('player'+elmNbPlayer.selectedIndex);
+			var oJson = JSON.parse(sJson);
+			if (oJson)
+			{
+				elmNbDie.selectedIndex = oJson['nbDie'];
+				elmNbHit.selectedIndex = oJson['nbHit'];
+				elmPlusOne.checked     = oJson['plusOne'];
+				elmCritical6.checked   = oJson['critical6'];
+			}
+			else
+			{
+				elmNbDie.selectedIndex = 0;
+				elmNbHit.selectedIndex = 2;
+				elmPlusOne.checked     = false;
+				elmCritical6.checked   = false;
+			}						
+		}
+
+		function savePlayer()
+		{
+			var obj 			= new Object()
+			obj['nbDie']		= elmNbDie.selectedIndex;
+			obj['nbHit']		= elmNbHit.selectedIndex;
+			obj['plusOne'] 		= elmPlusOne.checked;
+			obj['critical6'] 	= elmCritical6.checked;
+
+			var sJson = JSON.stringify(obj);
+			localStorage.setItem('player'+elmNbPlayer.selectedIndex, sJson);		
+		}
+		
+		function resetCache()
+		{
+			while (elmResult.firstChild)
+				elmResult.removeChild(elmResult.firstChild);      
+		
+			for (i=0; i < 10; i++)
+				localStorage.setItem('player'+i, null);
+			
+			elmNbPlayer.selectedIndex = 0;
+			loadPlayer();
+		}
+		
+		function fight()
+		{		
+			savePlayer();		
+			
+			var sRetour 			= '';
+			var iNbDie 			= parseInt(elmNbDie.options[elmNbDie.selectedIndex].value);		
+			var iNbHit 			= parseInt(elmNbHit.options[elmNbHit.selectedIndex].value);			
+			var aDice 			= new Array();
+			var aCritical		= new Array();
+			var iSuccess        = 0;
+			var iPlusOne		= 0;
+			
+			if (elmPlusOne.checked)
+				iPlusOne++;
+
+			for (i=0; i < iNbDie; i++)
+			{
+				var dice = getDice();
+				
+				if ((dice + iPlusOne) >= iNbHit)
+                    iSuccess++;
+				
+				aDice.push(dice);
+					
+				if (elmCritical6.checked)
+					while ((dice + iPlusOne) > 5)
+					{
+						dice = getDice();
+	                    
+	                    if ((dice + iPlusOne) >= iNbHit)
+                            iSuccess++;
+				
+						aCritical.push(dice);
+					}				
+			}
+
+			var currentdate = new Date();
+			var ts = ( (currentdate.getHours() < 10) ? '0'+currentdate.getHours() : currentdate.getHours() )  + ":" + ( (currentdate.getMinutes() < 10) ? '0'+currentdate.getMinutes() : currentdate.getMinutes() ) + ":" + ( (currentdate.getSeconds() < 10) ? '0'+currentdate.getSeconds() : currentdate.getSeconds() ) ;
+
+			ligne++;
+			var sCss = (ligne%2) ? 'css0' : 'css1';
+			
+			sRetour = '<div class="'+sCss+'">';
+			sRetour += '&nbsp;<span class="ts">'+ts+' #'+(1+elmNbPlayer.selectedIndex)+' <span style="color:green; font-weight: bold;">'+iSuccess+'!</span></span>';	
+			
+			aDice.sort();
+			aDice.reverse();			
+			sRetour += getFace(aDice, iNbHit, iPlusOne)
+			
+			if (aCritical.length)
+			{
+				sRetour += '+';
+    			aCritical.sort();
+    			aCritical.reverse();
+    			sRetour += getFace(aCritical, iNbHit, iPlusOne)
+			}			
+			sRetour += '</div>';						
+			insertHTML(elmResult, sRetour);
+		}		
+
+		function insertHTML(obj, html)
+		{
+			if (!obj)
+				return false;
+			if (html == undefined)
+				return false;
+			var range   = document.createRange();
+			var content = range.createContextualFragment(html);
+			obj.insertBefore(content,obj.firstChild);
+		}
+  
+		function getFace(myArr,limit,bonus)
+		{
+			var sRetour = '';
+			for (var idice in myArr)
+			{
+				var dice = myArr[idice];
+				
+				color = 'g'; //green
+												
+				if ((dice+bonus) < limit)
+					color = 'r'; //red
+
+				if ((dice+bonus)<2)
+					color = 'b'; //black
+				
+				sRetour += '<img src="img/'+myArr[idice] + color +'.png" width="24" height="24" align="absmiddle">';
+			}		
+			return sRetour;
+		}
+		
+		function getDice()
+		{
+			var die = parseInt(Math.floor(Math.random() * 6)+1);
+			return die;
+		}
+		
+		function showStat()
+		{
+			var iNbDie = parseInt(nbDie.options[elmNbDie.selectedIndex].value);		
+			var iNbHit = parseInt(nbHit.options[elmNbHit.selectedIndex].value);
+			if (elmPlusOne.checked)
+				iNbHit--;
+				
+			var str = (aStat[iNbHit-1] * iNbDie / 100);
+			str 	= Math.round(str * 10) / 10
+			elmBtnFight.value = ' Fight ! (~'+str+') ';
+		}
+    </script>
+    </body>
+    </html>
